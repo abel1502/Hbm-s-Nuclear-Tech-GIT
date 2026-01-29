@@ -1,7 +1,7 @@
 {
 	"name": "Drive",
-	"icon": ["hbm:item.hard_drive_full", 1, 0],
-	"trigger": [["hbm:item.hard_drive_full"], ["hbm:item.hard_drive"]],
+	"icon": ["hbm:item.hard_drive", 1, 0],
+	"trigger": [["hbm:item.hard_drive"]],
 	"title": {
 		"en_US": "Drive"
 	},

@@ -72,6 +72,27 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 
 			bindTexture(ResourceManager.htrf4_exhaust_tex);
 			ResourceManager.htrf4_neo.renderPart("Exhaust");
+
+			
+			GL11.glMatrixMode(GL11.GL_TEXTURE);
+			GL11.glLoadIdentity();
+
+			long time = Clock.get_ms();
+			double sparkleSpin = time / 250D % 1D;
+			
+			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
+			GL11.glColor4d(rocket.plasmaR * 2, rocket.plasmaG * 2, rocket.plasmaB * 2, rocket.thrustAmount * 0.75);
+
+			GL11.glRotatef(-90, 0, 1, 0); // it's wrong but it looks cooler as a series of concentric rings so whatever
+			GL11.glTranslated(0, sparkleSpin, 0);
+			
+			bindTexture(ResourceManager.fusion_plasma_sparkle_tex);
+			ResourceManager.htrf4_neo.renderPart("Exhaust");
+
+			GL11.glLoadIdentity();
+			GL11.glMatrixMode(GL11.GL_MODELVIEW);
+
+
 			
 			GL11.glDepthMask(true);
 			GL11.glPopAttrib();

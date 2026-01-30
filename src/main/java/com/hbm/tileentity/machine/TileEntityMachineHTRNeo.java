@@ -92,17 +92,18 @@ public class TileEntityMachineHTRNeo extends TileEntityCooledBase implements IPr
 			}
 
 			if(isOn) {
+				System.out.println(soundtime);
 				soundtime++;
 
 				if(soundtime == 1) {
-					this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:misc.htrstart", 1.5F, 1F);
-				} else if(soundtime > 20) {
-					soundtime = 20;
+					this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:misc.htrfstart", 1.5F, 1F);
+				} else if(soundtime > 30) {
+					soundtime = 30;
 				}
 			} else {
 				soundtime--;
 
-				if(soundtime == 19) {
+				if(soundtime == 29) {
 					this.worldObj.playSoundEffect(this.xCoord, this.yCoord, this.zCoord, "hbm:misc.htrstop", 2.0F, 1F);
 				} else if(soundtime <= 0) {
 					soundtime = 0;
@@ -146,7 +147,7 @@ public class TileEntityMachineHTRNeo extends TileEntityCooledBase implements IPr
 			}
 
 			if(isOn) {
-				if(soundtime > 18) {
+				if(soundtime > 28) {
 					if(audio == null) {
 						audio = createAudioLoop();
 						audio.startSound();

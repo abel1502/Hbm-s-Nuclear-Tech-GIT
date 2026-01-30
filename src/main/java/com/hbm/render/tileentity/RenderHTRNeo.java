@@ -7,6 +7,7 @@ import com.hbm.blocks.ModBlocks;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.item.ItemRenderBase;
 import com.hbm.tileentity.machine.TileEntityMachineHTRNeo;
+import com.hbm.util.Clock;
 
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -55,7 +56,7 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 		trailStretch *= rocket.thrustAmount;
 		
 		if(trailStretch > 0) {
-			GL11.glColor4d(1, 1, 1, rocket.thrustAmount);
+			GL11.glColor4d(rocket.plasmaR, rocket.plasmaG, rocket.plasmaB, rocket.thrustAmount);
 
 			GL11.glDisable(GL11.GL_CULL_FACE);
 			GL11.glDisable(GL11.GL_LIGHTING);
@@ -69,7 +70,7 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 			GL11.glScalef(1, 1, trailStretch);
 			GL11.glTranslatef(0, 0, -12);
 
-			bindTexture(ResourceManager.xenon_exhaust_tex);
+			bindTexture(ResourceManager.htrf4_exhaust_tex);
 			ResourceManager.htrf4_neo.renderPart("Exhaust");
 			
 			GL11.glDepthMask(true);

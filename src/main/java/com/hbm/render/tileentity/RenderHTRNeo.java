@@ -6,7 +6,9 @@ import com.hbm.blocks.BlockDummyable;
 import com.hbm.blocks.ModBlocks;
 import com.hbm.main.ResourceManager;
 import com.hbm.render.item.ItemRenderBase;
+import com.hbm.tileentity.machine.TileEntityMachineHTRNeo;
 
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.tileentity.TileEntity;
@@ -16,6 +18,9 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float interp) {
+		if(!(tile instanceof TileEntityMachineHTRNeo)) return;
+		TileEntityMachineHTRNeo rocket = (TileEntityMachineHTRNeo) tile;
+
 		GL11.glPushMatrix();
 		GL11.glTranslated(x + 0.5D, y - 2.0D, z + 0.5D);
 		GL11.glEnable(GL11.GL_LIGHTING);
@@ -27,9 +32,54 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 		case 4: GL11.glRotatef(180, 0F, 1F, 0F); break;
 		}
 
+		float rot = rocket.prevRotor + (rocket.rotor - rocket.prevRotor) * interp;
+
 		GL11.glShadeModel(GL11.GL_SMOOTH);
-		bindTexture(ResourceManager.htrtex);
-		ResourceManager.htrf4_neo.renderAll();
+		bindTexture(ResourceManager.htrf4_neo_tex);
+		ResourceManager.htrf4_neo.renderOnly("Base", "Engine");
+
+		GL11.glPushMatrix();
+		{
+
+			GL11.glTranslatef(0, 2.5F, 0);
+			GL11.glRotatef(rot, 0, 0, 1);
+			GL11.glTranslatef(0, -2.5F, 0);
+			ResourceManager.htrf4_neo.renderOnly("Rotor", "Rotor2");
+
+		}
+		GL11.glPopMatrix();
+		
+
+		float trailStretch = tile.getWorldObj().rand.nextFloat();
+		trailStretch = 1.2F - (trailStretch * trailStretch * 0.2F);
+		trailStretch *= rocket.thrustAmount;
+		
+		if(trailStretch > 0) {
+			GL11.glColor4d(1, 1, 1, rocket.thrustAmount);
+
+			GL11.glDisable(GL11.GL_CULL_FACE);
+			GL11.glDisable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_BLEND);
+			OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);
+			GL11.glPushAttrib(GL11.GL_LIGHTING_BIT);
+			OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240F, 240F);
+			GL11.glDepthMask(false);
+			
+			GL11.glTranslatef(0, 0, 12);
+			GL11.glScalef(1, 1, trailStretch);
+			GL11.glTranslatef(0, 0, -12);
+
+			bindTexture(ResourceManager.xenon_exhaust_tex);
+			ResourceManager.htrf4_neo.renderPart("Exhaust");
+			
+			GL11.glDepthMask(true);
+			GL11.glPopAttrib();
+			GL11.glEnable(GL11.GL_LIGHTING);
+			GL11.glEnable(GL11.GL_CULL_FACE);
+			GL11.glDisable(GL11.GL_BLEND);
+
+			GL11.glColor4d(1, 1, 1, 1);
+		}
 		
 		GL11.glShadeModel(GL11.GL_FLAT);
 
@@ -52,7 +102,7 @@ public class RenderHTRNeo extends TileEntitySpecialRenderer implements IItemRend
 			public void renderCommon() {
 				GL11.glScaled(0.5, 0.5, 0.5);
 				GL11.glShadeModel(GL11.GL_SMOOTH);
-				bindTexture(ResourceManager.htrtex);
+				bindTexture(ResourceManager.htrf4_neo_tex);
 				ResourceManager.htrf4_neo.renderAll();
 				GL11.glShadeModel(GL11.GL_FLAT);
 			}

@@ -33,12 +33,14 @@ import com.hbm.dim.WorldTypeTeleport;
 import com.hbm.dim.orbit.OrbitalStation;
 import com.hbm.dim.orbit.WorldProviderOrbit;
 import com.hbm.dim.trait.CBT_Atmosphere;
+import com.hbm.dim.trait.CBT_Invasion;
 import com.hbm.dim.trait.CBT_Lights;
 import com.hbm.dim.trait.CelestialBodyTrait;
 import com.hbm.entity.missile.EntityRideableRocket;
 import com.hbm.entity.missile.EntityRideableRocket.RocketState;
 import com.hbm.entity.mob.EntityCreeperTainted;
 import com.hbm.entity.mob.EntityCyberCrab;
+import com.hbm.entity.mob.siege.EntitySiegeCraft;
 import com.hbm.entity.projectile.EntityBulletBaseMK4;
 import com.hbm.entity.projectile.EntityBurningFOEQ;
 import com.hbm.entity.train.EntityRailCarBase;
@@ -386,6 +388,16 @@ public class ModEventHandler {
 			}
 		}
 
+		if(event.entity instanceof EntitySiegeCraft) {
+
+			CelestialBody body = CelestialBody.getBody(event.entity.worldObj);
+			CBT_Invasion alien = body.getTrait(CBT_Invasion.class);
+
+			if(alien == null) return;
+			alien.Increment();
+
+			body.modifyTraits(alien);
+		}
 		if(!event.entityLiving.worldObj.isRemote) {
 
 			if(event.source==ModDamageSource.eve)
@@ -913,6 +925,16 @@ public class ModEventHandler {
 				}
 			}
 		}
+		if(event.phase == Phase.END) {
+			CelestialBody body = CelestialBody.getBody(event.world);
+			CBT_Invasion alien = body.getTrait(CBT_Invasion.class);
+
+			if(alien == null) return;
+			alien.SpawnAttempt(event.world);
+
+			body.modifyTraits(alien);
+		}
+
 	}
 
 	private void updateWaterOpacity(World world) {

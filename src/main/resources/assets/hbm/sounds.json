@@ -425,6 +425,6 @@
 
 	"alarm.singer": {"category": "player", "sounds": ["alarm/singer1", "alarm/singer2", "alarm/singer3", "alarm/singer4"]},
 	"alarm.ducc": {"category": "record", "sounds": [{"name": "alarm/ducc", "stream": false}]},
-	"alarm.mama": {"category": "record", "sounds": [{"name": "alarm/mama", "stream": false}]}
-
+	"alarm.mama": {"category": "record", "sounds": [{"name": "alarm/mama", "stream": false}]},
+	"alarm.ping": {"category": "player", "sounds": [{"name": "alarm/alarmping", "stream": false}]}
 }

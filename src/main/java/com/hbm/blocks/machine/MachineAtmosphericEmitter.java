@@ -45,14 +45,14 @@ public class MachineAtmosphericEmitter extends BlockDummyable implements ILookOv
 	public void fillSpace(World world, int x, int y, int z, ForgeDirection dir, int o) {
 		super.fillSpace(world, x, y, z, dir, o);
 		
-		x -= dir.offsetX;
-		z -= dir.offsetZ;
+		x -= dir.offsetX * o;
+		z -= dir.offsetZ * o;
 
 		ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
 
-		this.makeExtra(world, x - dir.offsetX - rot.offsetX, y, z - dir.offsetZ - rot.offsetZ);
-		this.makeExtra(world, x, y, z - dir.offsetZ - rot.offsetZ);
-		this.makeExtra(world, x - dir.offsetX - rot.offsetX, y, z);
+		this.makeExtra(world, x - dir.offsetX + rot.offsetX, y, z - dir.offsetZ + rot.offsetZ);
+		this.makeExtra(world, x, y, z - dir.offsetZ + rot.offsetZ);
+		this.makeExtra(world, x - dir.offsetX + rot.offsetX, y, z);
 	}
 	
 	@Override
@@ -95,7 +95,8 @@ public class MachineAtmosphericEmitter extends BlockDummyable implements ILookOv
 		
 		TileEntityAtmosphericEmitter drain = (TileEntityAtmosphericEmitter) te;
 		List<String> text = new ArrayList<>();
-		text.add(EnumChatFormatting.GREEN + "-> " + EnumChatFormatting.RESET + BobMathUtil.getShortNumber(drain.power) + "HE");
+		
+		text.add((drain.power < Math.max(drain.tank.getFill() / 2, 1) * 10 ? EnumChatFormatting.RED : EnumChatFormatting.GREEN) + "Power: " + BobMathUtil.getShortNumber(drain.power) + "HE");
 		text.add(EnumChatFormatting.GREEN + "-> " + EnumChatFormatting.RESET + drain.tank.getTankType().getLocalizedName() + ": " + drain.tank.getFill() + "/" + drain.tank.getMaxFill() + "mB");
 		ILookOverlay.printGeneric(event, I18nUtil.resolveKey(getUnlocalizedName() + ".name"), 0xffff00, 0x404000, text);
 	}

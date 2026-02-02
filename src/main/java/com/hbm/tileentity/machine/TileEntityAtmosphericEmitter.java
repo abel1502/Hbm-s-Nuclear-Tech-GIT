@@ -86,6 +86,7 @@ public class TileEntityAtmosphericEmitter extends TileEntityLoadedBase implement
 
 				if(tank.getFill() > 0 && MainRegistry.proxy.me().getDistance(xCoord, yCoord, zCoord) < 100) {
 					ForgeDirection dir = ForgeDirection.getOrientation(this.getBlockMetadata() - 10);
+					ForgeDirection rot = dir.getRotation(ForgeDirection.UP);
 
 					NBTTagCompound data = new NBTTagCompound();
 					data.setFloat("lift", 0.5F);
@@ -96,8 +97,8 @@ public class TileEntityAtmosphericEmitter extends TileEntityLoadedBase implement
 					data.setString("type", "tower");
 
 					data.setInteger("color", tank.getTankType().getColor());
-					data.setDouble("posX", xCoord + 0.5 - dir.offsetX * 0.5);
-					data.setDouble("posZ", zCoord + 0.5 - dir.offsetZ * 0.5);
+					data.setDouble("posX", xCoord + 0.5 - dir.offsetX * 0.5 + rot.offsetX * 0.5);
+					data.setDouble("posZ", zCoord + 0.5 - dir.offsetZ * 0.5 + rot.offsetZ * 0.5);
 					data.setDouble("posY", yCoord + 2.5);
 
 					data.setDouble("mY", 0.2);

@@ -171,14 +171,18 @@ public abstract class DoorDecl {
 			if(state == TileEntityDoorGeneric.STATE_CLOSING) return new BusAnimation().addBus("DOOR", new BusAnimationSequence().setPos(0, 1, 0).addPos(0, 0, 0, this.timeToOpen() * 50));
 			return null;
 		}
-
-		public final ResourceLocation[] skins = new ResourceLocation[] {
+		
+		@SideOnly(Side.CLIENT)
+		@Override
+		public ResourceLocation[] getSEDNASkins() {
+			return new ResourceLocation[] {
 				ResourceManager.pheo_fire_door_tex,
 				ResourceManager.pheo_fire_door_black_tex,
 				ResourceManager.pheo_fire_door_orange_tex,
-		};
-		
-		@Override public ResourceLocation[] getSEDNASkins() { return skins; }
+			};
+		}
+
+		@Override public int getSkinCount() { return 3; }
 
 		@Override public int timeToOpen() { return 160; }
 		@Override public int[][] getDoorOpenRanges() { return new int[][] { { -1, 0, 0, 3, 4, 1 } }; }
@@ -300,13 +304,17 @@ public abstract class DoorDecl {
 			else if(y == 0) return AxisAlignedBB.getBoundingBox(0, 0, 0, 1, 1, 1);
 			else return super.getBlockBound(x, y, z, open, forCollision);
 		}
-
-		public final ResourceLocation[] skins = new ResourceLocation[] {
+		
+		@SideOnly(Side.CLIENT)
+		@Override
+		public ResourceLocation[] getSEDNASkins() {
+			return new ResourceLocation[] {
 				ResourceManager.pheo_secure_door_tex,
 				ResourceManager.pheo_secure_door_grey_tex
-		};
-		
-		@Override public ResourceLocation[] getSEDNASkins() { return skins; }
+			};
+		}
+
+		@Override public int getSkinCount() { return 2; }
 	};
 
 	public static final DoorDecl ROUND_AIRLOCK_DOOR = new DoorDecl() {
@@ -327,13 +335,17 @@ public abstract class DoorDecl {
 			return null;
 		}
 
-		public final ResourceLocation[] skins = new ResourceLocation[] {
+		@SideOnly(Side.CLIENT)
+		@Override
+		public ResourceLocation[] getSEDNASkins() {
+			return new ResourceLocation[] {
 				ResourceManager.pheo_airlock_door_tex,
 				ResourceManager.pheo_airlock_door_clean_tex,
 				ResourceManager.pheo_airlock_door_green_tex
-		};
-		
-		@Override public ResourceLocation[] getSEDNASkins() { return skins; }
+			};
+		}
+
+		@Override public int getSkinCount() { return 3; }
 
 		@Override
 		public AxisAlignedBB getBlockBound(int x, int y, int z, boolean open, boolean forCollision) {
@@ -667,21 +679,19 @@ public abstract class DoorDecl {
 		return f;
 	}
 
-	public ResourceLocation[] getSEDNASkins() { return null; }
+	@SideOnly(Side.CLIENT) public ResourceLocation[] getSEDNASkins() { return null; }
+
 	public boolean hasSkins() { return getSkinCount() > 0; }
+	public int getSkinCount() { return 0; }
 	
-	public int getSkinCount() {
-		ResourceLocation[] skins = this.getSEDNASkins();
-		if(skins == null || skins.length <= 1) return 0;
-		return skins.length;
-	}
-	
+	@SideOnly(Side.CLIENT)
 	public ResourceLocation getCyclingSkins() {
 		ResourceLocation[] skins = this.getSEDNASkins();
 		int index = (int) ((Clock.get_ms() % (skins.length * 1000)) / 1000);
 		return skins[index];
 	}
 	
+	@SideOnly(Side.CLIENT)
 	public ResourceLocation getSkinFromIndex(int index) {
 		ResourceLocation[] skins = this.getSEDNASkins();
 		return skins[Math.abs(index) % skins.length];

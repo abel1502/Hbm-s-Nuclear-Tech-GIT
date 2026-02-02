@@ -2691,15 +2691,6 @@ public class ModBlocks {
 		ccl_block = new GenericFluidBlock(ccl_fluid, Material.water, "ccl", "ccl_flowing").setDamage(ModDamageSource.lead, 1F).setBlockName("ccl_block").setResistance(500F);
 
 
-		flesh_block = new MeltedFlesh(Material.snow).setBlockName("flesh_block").setStepSound(Block.soundTypeGravel).setCreativeTab(MainRegistry.blockTab).setHardness(0.1F).setLightOpacity(0).setBlockTextureName(RefStrings.MODID + ":meltedFlesh");
-		charred_flesh_block = new MeltedFlesh(Material.snow).setBlockName("charred_flesh_block").setStepSound(Block.soundTypeGravel).setCreativeTab(MainRegistry.blockTab).setHardness(0.1F).setLightOpacity(0).setBlockTextureName(RefStrings.MODID + ":charredFlesh");
-		carbonized_flesh_block = new MeltedFlesh(Material.snow).setBlockName("carbonized_flesh_block").setStepSound(Block.soundTypeGravel).setCreativeTab(MainRegistry.blockTab).setHardness(0.1F).setLightOpacity(0).setBlockTextureName(RefStrings.MODID + ":carbonizedFlesh");
-
-		ccl_fluid = new GenericFluid("ccl_fluid").setDensity(1840).setViscosity(1000).setTemperature(273);
-		FluidRegistry.registerFluid(ccl_fluid);
-		ccl_block = new GenericFluidBlock(ccl_fluid, Material.water, "ccl", "ccl_flowing").setDamage(ModDamageSource.lead, 1F).setBlockName("ccl_block").setResistance(500F);
-
-
 		dummy_block_blast = new DummyBlockBlast(Material.iron).setBlockName("dummy_block_blast").setHardness(10.0F).setResistance(10000.0F).setCreativeTab(null).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		dummy_plate_compact_launcher = new DummyBlockMachine(Material.iron, compact_launcher, false).setBounds(0, 16, 0, 16, 16, 16).setBlockName("dummy_plate_compact_launcher").setHardness(5.0F).setResistance(10.0F).setCreativeTab(null).setBlockTextureName(RefStrings.MODID + ":block_steel");
 		dummy_port_compact_launcher = new DummyBlockMachine(Material.iron, compact_launcher, true).setBlockName("dummy_port_compact_launcher").setHardness(5.0F).setResistance(10.0F).setCreativeTab(null).setBlockTextureName(RefStrings.MODID + ":block_steel");

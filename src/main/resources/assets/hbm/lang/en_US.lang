@@ -6338,6 +6338,7 @@ tile.machine_assemfac.name=Assembly Factory (LEGACY)
 tile.machine_assembly_factory.name=Assembly Factory
 tile.machine_assembly_factory.desc=Quadruple assembly machine.$Recipes process twice as fast,$but need twice as much power.$Needs to be cooled with water,$produces low-pressure steam.
 tile.machine_atmo_tower.name=Atmospheric Liquefaction Tower
+tile.machine_atmo_emitter.name=Atmospheric Emitter
 tile.machine_atmo_vent.name=Atmospheric Compressor
 tile.machine_assembly_machine.name=Assembly Machine
 tile.machine_autocrafter.name=Automatic Crafting Table

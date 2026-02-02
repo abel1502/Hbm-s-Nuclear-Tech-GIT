@@ -369,6 +369,7 @@ public class TileMappings {
 		put(TileEntityMachineLiquefactor.class, "tileentity_liquefactor");
 		put(TileEntityMachineSolidifier.class, "tileentity_solidifier");
 		put(TileEntityMachineIntake.class, "tileentity_intake");
+		put(TileEntityAtmosphericEmitter.class, "tileentity_atmo_emitter");
 		put(TileEntityMachineCompressor.class, "tileentity_compressor");
 		put(TileEntityMachineCompressorCompact.class, "tileentity_compressor_compact");
 		put(TileEntityElectrolyser.class, "tileentity_electrolyser");

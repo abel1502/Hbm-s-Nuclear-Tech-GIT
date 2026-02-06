@@ -7035,7 +7035,7 @@ tile.machine_milk_reformer.name=Молочный реформер
 tile.machine_lpw2.name=Ракетный двигатель LPW-2
 tile.machine_htr3.name=Ракетный двигатель LPW-3N
 tile.machine_xenon_thruster.name=Ракетный двигатель XNM-1
-tile.machine_htrf4.name=Ракетный двигатель HTR-F4
+tile.machine_htrf4.name=Ракетный двигатель HTR-F4 (LEGACY)
 tile.nuke_antimatter.name=Антиматериальная бомба
 container.nukeAntimatter=Антиматериальная бомба
 tile.rbmk_burner.name=Жидкостный прогреватель РБМК
@@ -7067,7 +7067,7 @@ tile.orrery.name=Планетарий
 tile.orbital_station_launcher.name=Орбитальный космодром
 tile.orbital_station_launcher.desc=Позволяет создать и затем запустить ракету прямо со станции на орбите!
 tile.machine_atmo_emitter.name=Атмосферный источник
-tile.machine_htrf4neo.name=Ракетный двигатель HTR-F4 НЕО
+tile.machine_htrf4neo.name=Ракетный двигатель HTR-F4
 tile.machine_htrf4neo.desc=Используется для орбитальных перелётов.$Для работы подключите к работающему$термоядерному реактору.$Требуются энергия и охлаждение!
 
 // Items
